@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -45,6 +45,10 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'factory_girl_rails'
   gem 'faker'
+<<<<<<< HEAD
+=======
+  gem 'shoulda-matchers', '~> 3.0', '>= 3.0.1'
+>>>>>>> d1920bd43ee787d6ffd12d82d7415c5fa2a1eef0
 end
 
 group :development do
