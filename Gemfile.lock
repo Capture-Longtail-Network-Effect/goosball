@@ -178,7 +178,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bourbon
+  bourbon (~> 4.2, >= 4.2.6)
   byebug
   capybara-webkit
   coffee-rails (~> 4.1.0)
@@ -187,10 +187,10 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mysql2
-  neat
+  neat (~> 1.7, >= 1.7.2)
   rails (= 4.2.5)
   rspec-rails (~> 3.0)
-  sass
+  sass (~> 3.4, >= 3.4.19)
   sdoc (~> 0.4.0)
   shoulda-matchers (~> 3.0, >= 3.0.1)
   spring
