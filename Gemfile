@@ -20,6 +20,9 @@ gem 'bourbon', '~> 4.2', '>= 4.2.6'
 # tidy up our own bourbon
 gem 'neat', '~> 1.7', '>= 1.7.2'
 
+# we scaffold common stylesheet and html elements
+gem 'bitters', '~> 1.1'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
