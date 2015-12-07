@@ -11,6 +11,15 @@ gem 'mysql2'
 gem 'sprockets', '~> 3.0'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 
+# we need sass to do a neat thing
+gem 'sass', '~> 3.4', '>= 3.4.19'
+
+# use our lovely bourboun
+gem 'bourbon', '~> 4.2', '>= 4.2.6'
+
+# tidy up our own bourbon
+gem 'neat', '~> 1.7', '>= 1.7.2'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
