@@ -1,1 +1,27 @@
+<%= form_for @pairing do |f| %>
+	<% if @pairing.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@pairing.errors.count, "error") %> prohibited this pairing from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @pairing.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.label :member_1, :class => 'control-label' %>
+  <%= f.collection_select(:member_1, Member.all, :id, :name) %>
+  <%= f.label :member_2, :class => 'control-label' %>
+  <%= f.collection_select(:member_2, Member.all, :id, :name) %>
+
+	<%= f.label :date %>
+	<%= f.date_select :date %>
+
+	<%= f.submit 'Register' %>
+<% end %>
 
