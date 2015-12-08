@@ -13,31 +13,31 @@
 
 ActiveRecord::Schema.define(version: 20151208042516) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "members", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "role",       limit: 255
-    t.string   "email",      limit: 255
-    t.string   "github",     limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.string   "role"
+    t.string   "email"
+    t.string   "github"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pairs", force: :cascade do |t|
-    t.integer  "driver_id",    limit: 4
-    t.integer  "navigator_id", limit: 4
+    t.integer  "driver_id"
+    t.integer  "navigator_id"
     t.datetime "date"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  add_index "pairs", ["driver_id"], name: "fk_rails_8f5d7c64a5", using: :btree
-  add_index "pairs", ["navigator_id"], name: "fk_rails_40b5e7db00", using: :btree
-
   create_table "users", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "password",   limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.string   "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "pairs", "members", column: "driver_id"

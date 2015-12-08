@@ -5,9 +5,12 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: mysql2
-  username: dinouser
-  password: dinopass
+  adapter: postgresql
+  encoding: unicode
+  database: dino_roulette
+  pool: 5
+  username: dudepwa
+  password: 
 
 development:
   <<: *default

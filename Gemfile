@@ -6,6 +6,7 @@ gem 'rails', '4.2.5'
 
 # Use Mysql as default database
 gem 'mysql2'
+gem 'pg'
 
 # Use sprockets, even if we don't really need them
 gem 'sprockets', '~> 3.0'
