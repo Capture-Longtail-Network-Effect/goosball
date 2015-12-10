@@ -1,6 +1,13 @@
 class PairingsController < ApplicationController
 	def index
-		@pairings = Pairing.all
+        @matrix = []
+        m = Pairing.group(:members_ids).order('count_members_ids desc').count(:members_ids)
+        m.keys.each do |pairing|
+            member1_name = Member.find(pairing[0])
+            member2_name = Member.find(pairing[1])
+            freq = m[pairing]
+            @matrix << {member_1: member1_name, member_2: member2_name, freq: freq}
+        end
 	end
 
 	def new
@@ -9,10 +16,19 @@ class PairingsController < ApplicationController
 
 	def create
 		@pairing = Pairing.new
-		@pairing.date = Date.new pairing_params["date(1i)"].to_i, 
+
+        member_1 = pairing_params[:member_1]
+        member_2 = pairing_params[:member_2]
+        
+        #swap if member 2 is greater than member2
+        if member_2 > member_1 
+            member_1,member_2 = member_2, member_1
+        end
+		
+        @pairing.date = Date.new pairing_params["date(1i)"].to_i, 
 														 pairing_params["date(2i)"].to_i, 
 														 pairing_params["date(3i)"].to_i
-		@pairing.members_ids = [pairing_params[:member_1], pairing_params[:member_2]]
+		@pairing.members_ids = [member_1, member_2]
 		if @pairing.save
 			flash[:notice] = "Pairins created"
 			redirect_to pairings_path
