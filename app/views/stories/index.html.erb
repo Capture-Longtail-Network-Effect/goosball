@@ -1,0 +1,18 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Pairing</th>
+            <th>Date</th>
+            <th>Story</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @stories.each do |story| %>
+        <tr>
+            <td><%= story.pairing %></td>
+            <td><%= story.pairing.date %></td>
+            <td><%= story.story %></td>
+        </tr>
+    <%end%>
+    </tbody>
+</table>
