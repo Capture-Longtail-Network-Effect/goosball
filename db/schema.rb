@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208073954) do
+ActiveRecord::Schema.define(version: 20151210083350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,13 +32,14 @@ ActiveRecord::Schema.define(version: 20151208073954) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "pairs", force: :cascade do |t|
-    t.integer  "driver_id"
-    t.integer  "navigator_id"
-    t.datetime "date"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+  create_table "stories", force: :cascade do |t|
+    t.text     "story"
+    t.integer  "pairing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
+
+  add_index "stories", ["pairing_id"], name: "index_stories_on_pairing_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -47,6 +48,5 @@ ActiveRecord::Schema.define(version: 20151208073954) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "pairs", "members", column: "driver_id"
-  add_foreign_key "pairs", "members", column: "navigator_id"
+  add_foreign_key "stories", "pairings"
 end

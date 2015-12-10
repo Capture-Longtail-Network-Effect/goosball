@@ -11,7 +11,7 @@
         <% @matrix.each do |pairing| %>
             <tr>
                 <% if pairing[:member_1] == pairing[:member_2] %>
-                    <td colspan="2" align="center"><%= pairing[:member_1].name %> (solo)</td>
+                    <td colspan="2"><%= pairing[:member_1].name %> (solo)</td>
                 <%else%>
                     <td><%= pairing[:member_1].name %></td>
                     <td><%= pairing[:member_2].name %></td>
