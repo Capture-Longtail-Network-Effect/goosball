@@ -12,11 +12,13 @@
             <tr>
                 <td><%=member.name%></td>
                 <% @members.each do |pasangan| %>
-                <% if @pairings.has_key? [member.id, pasangan.id] %>
-                    <td><%=@pairings[[member.id, pasangan.id]]%></td>
-                <%else%>
-                    <td>0</td>
-                <%end%>
+                    <%if pasangan.id > member.id %>
+                        <td>-</td>
+                    <%elsif @pairings.has_key? [member.id, pasangan.id] %>
+                        <td><%=@pairings[[member.id, pasangan.id]]%></td>
+                    <%else%>
+                        <td>0</td>
+                    <%end%>
                 <%end%>
             </tr>
         <% end %>
