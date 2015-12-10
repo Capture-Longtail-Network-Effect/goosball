@@ -10,6 +10,11 @@ class PairingsController < ApplicationController
         end
 	end
 
+    def chart
+        @members = Member.all()
+        @pairings = Pairing.group(:members_ids).order('count_members_ids desc').count(:members_ids)
+    end
+
 	def new
 		@pairing = Pairing.new
 	end

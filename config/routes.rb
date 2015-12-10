@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'pairings/chart' => 'pairings#chart'
   resources(:pairings)
   resources(:members)
   # The priority is based upon order of creation: first created -> highest priority.

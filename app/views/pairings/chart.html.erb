@@ -1,0 +1,24 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>*</th>
+            <% @members.each do |member| %>
+                <th><%=member.name%></th>
+            <% end %>
+        </tr>
+    </thead>
+    <tbody>
+        <% @members.each do |member| %>
+            <tr>
+                <td><%=member.name%></td>
+                <% @members.each do |pasangan| %>
+                <% if @pairings.has_key? [member.id, pasangan.id] %>
+                    <td><%=@pairings[[member.id, pasangan.id]]%></td>
+                <%else%>
+                    <td>0</td>
+                <%end%>
+                <%end%>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
