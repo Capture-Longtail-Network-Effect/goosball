@@ -1,0 +1,36 @@
+<%= form_for @story, :html => { :class => "form-horizontal problem" } do |f| %>
+
+    <% if @story.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@story.errors.count, "error") %> prohibited this problem from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @story.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+<% end %>
+
+<div class="control-group">
+    <%= f.label :pairing_id, :class => 'control-label' %>
+    <div class="controls">
+        <%= f.collection_select :pairing_id, Pairing.all, :id, :to_s, {}, {class: 'form-control'} %>
+    </div>
+</div>
+
+<div class="control-group">
+    <%= f.label :story, :class => 'control-label' %>
+    <div class="controls">
+        <%= f.text_area :story, class: 'form-control' %>
+    </div>
+</div>
+
+<div class="control-group">
+    <br>
+    <%= f.submit class: 'btn btn-primary' %>
+</div>
+<%end%>

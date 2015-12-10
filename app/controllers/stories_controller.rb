@@ -17,6 +17,10 @@ class StoriesController < ApplicationController
         end
     end
 
+    def edit
+        @story = Story.find(params[:id])
+    end
+
     def story_params
         params.require(:story).permit(:story, :pairing_id)
     end
