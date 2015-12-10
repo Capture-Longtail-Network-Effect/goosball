@@ -1,12 +1,21 @@
 class PairingsController < ApplicationController
 	def index
         @matrix = []
-        m = Pairing.group(:members_ids).order('count_members_ids desc').count(:members_ids)
-        m.keys.each do |pairing|
-            member1_name = Member.find(pairing[0])
-            member2_name = Member.find(pairing[1])
-            freq = m[pairing]
-            @matrix << {member_1: member1_name, member_2: member2_name, freq: freq}
+        Pairing.all.each do |pairing|
+            member1_name = Member.find(pairing.members_ids[0]).name
+            member2_name = Member.find(pairing.members_ids[1]).name
+            pairing_story = Story.where('pairing_id = ?', pairing.id).first
+            detail = {
+                member1: member1_name, 
+                member2: member2_name, 
+                date: pairing.date,
+            }
+            if pairing_story
+                detail[:story] = pairing_story.story
+                detail[:story_id] = pairing_story.id
+            end
+
+            @matrix << detail
         end
 	end
 

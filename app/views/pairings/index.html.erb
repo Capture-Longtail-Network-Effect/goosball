@@ -4,19 +4,26 @@
         <tr>
             <th>Member 1</th>
             <th>Member 2</th>
-            <th>Frekuensi</th>
+            <th>Date</th>
+            <th>Story</th>
         </tr>
     </thead>
     <tbody>
         <% @matrix.each do |pairing| %>
             <tr>
-                <% if pairing[:member_1] == pairing[:member_2] %>
-                    <td colspan="2"><%= pairing[:member_1].name %> (solo)</td>
+                <% if pairing[:member1] == pairing[:member2] %>
+                    <td colspan="2"><%= pairing[:member1] %> (solo)</td>
                 <%else%>
-                    <td><%= pairing[:member_1].name %></td>
-                    <td><%= pairing[:member_2].name %></td>
+                    <td><%= pairing[:member1] %></td>
+                    <td><%= pairing[:member2] %></td>
                 <%end%>
-                <td><%= pairing[:freq] %></td>
+                <td><%= pairing[:date] %></td>
+                <% if pairing[:story] %>
+                    <td><%= pairing[:story] %>
+                    (<%= link_to 'edit',  edit_story_path(pairing[:story_id])%>)</td>
+                <% else %>
+                    <td><%= link_to 'Add Story', new_story_path%></td>
+                <%end%>
             </tr>
         <% end %>
     </tbody>
