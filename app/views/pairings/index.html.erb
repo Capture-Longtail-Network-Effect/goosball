@@ -2,7 +2,6 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Member 1</th>
             <th>Member 2</th>
             <th>Date</th>
@@ -12,7 +11,6 @@
     <tbody>
         <% @matrix.each do |pairing| %>
             <tr>
-                <td><%= pairing[:id]%></td>
                 <% if pairing[:member1] == pairing[:member2] %>
                     <td colspan="2"><%= pairing[:member1] %> (solo)</td>
                 <%else%>
@@ -22,8 +20,7 @@
                 <td><%= pairing[:date] %></td>
                 <% if pairing[:story] %>
                     <td><%= pairing[:story] %>
-                    (<%= link_to 'edit',  edit_story_path(pairing[:story_id])%>, 
-                    <%= link_to 'delete', story_path(pairing[:story_id]), method: 'DELETE', confirm: 'Yakin?' %>)
+                    <%= link_to 'edit',  edit_story_path(pairing[:story_id]), class: 'btn btn-primary btn-xs'%> <%= link_to 'delete', story_path(pairing[:story_id]), method: 'DELETE', data: { confirm: 'Yakin?' }, class: 'btn btn-danger btn-xs' %>
                     </td>
                 <% else %>
                     <td><%= link_to 'Add Story', new_story_for_url(pairing[:id])%></td>
