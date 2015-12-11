@@ -24,7 +24,7 @@ class PairingsController < ApplicationController
 	end
 
     def chart
-        @members = Member.all()
+        @members = Member.order('id asc')
         @pairings = Pairing.group(:members_ids).order('count_members_ids desc').count(:members_ids)
     end
 
