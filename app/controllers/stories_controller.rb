@@ -11,7 +11,7 @@ class StoriesController < ApplicationController
         story = Story.new(story_params)
         if story.save
             flash[:notice] = "Story saved"
-            redirect_to action: "index"
+            redirect_to url_for(:controller => "pairings", :action => "index")
         else
             render "new"
         end
@@ -19,6 +19,16 @@ class StoriesController < ApplicationController
 
     def edit
         @story = Story.find(params[:id])
+    end
+
+    def update
+        @story = Story.find(params[:id])
+        if @story.update(story_params)
+            flash[:notice] = "Story updated"
+            redirect_to url_for(:controller => "pairings", :action => "index")
+        else
+            render 'edit'
+        end
     end
 
     def story_params
