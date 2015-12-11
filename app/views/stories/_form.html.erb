@@ -18,7 +18,14 @@
 <div class="control-group">
     <%= f.label :pairing_id, :class => 'control-label' %>
     <div class="controls">
-        <%#= f.collection_select :pairing_id, Pairing.all, :id, :to_s, {}, {class: 'form-control'} %>
+        <%if @pairing_id %>
+            <%= f.collection_select :pairing_id, Pairing.all, :id, :to_s, {selected: @pairing_id}, {class: 'form-control', disabled: 'disabled'} %>
+            <%= f.hidden_field :pairing_id, value: @pairing_id %>
+        <%elsif current_page?(edit_story_path)%>
+            <%= f.collection_select :pairing_id, Pairing.all, :id, :to_s, {}, {class: 'form-control', disabled: 'disabled'} %>
+        <%else%>
+            <%= f.collection_select :pairing_id, Pairing.all, :id, :to_s, {}, {class: 'form-control'} %>
+        <%end%>
     </div>
 </div>
 

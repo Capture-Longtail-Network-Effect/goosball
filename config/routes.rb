@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'pairings/chart' => 'pairings#chart'
+  get 'stories/new/:id' => 'stories#new', as: :new_story_for
   resources :pairings, :members, :stories
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

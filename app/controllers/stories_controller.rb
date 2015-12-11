@@ -4,6 +4,9 @@ class StoriesController < ApplicationController
     end
 
     def new
+        if params.has_key? :id
+          @pairing_id = params[:id]
+        end
         @story = Story.new
     end
 
