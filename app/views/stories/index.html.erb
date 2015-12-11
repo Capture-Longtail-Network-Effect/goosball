@@ -4,6 +4,7 @@
             <th>Pairing</th>
             <th>Date</th>
             <th>Story</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -12,6 +13,7 @@
             <td><%= story.pairing %></td>
             <td><%= story.pairing.date %></td>
             <td><%= story.story %></td>
+            <td><%= link_to  'Delete', story_path(story.id), method: 'DELETE', confirm: 'Yakin nich?'%> 
         </tr>
     <%end%>
     </tbody>

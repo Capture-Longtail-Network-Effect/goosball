@@ -34,6 +34,16 @@ class StoriesController < ApplicationController
         end
     end
 
+    def destroy
+        @story = Story.find(params[:id])
+        if @story.delete
+            flash[:notice] = 'Story deleted'
+        else
+            flash[:danger] = 'Sum ting wong'
+        end
+        redirect_to url_for(:controller => "pairings", :action => "index")
+    end
+
     def story_params
         params.require(:story).permit(:story, :pairing_id)
     end

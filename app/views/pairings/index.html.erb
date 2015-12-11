@@ -22,7 +22,9 @@
                 <td><%= pairing[:date] %></td>
                 <% if pairing[:story] %>
                     <td><%= pairing[:story] %>
-                    (<%= link_to 'edit',  edit_story_path(pairing[:story_id])%>)</td>
+                    (<%= link_to 'edit',  edit_story_path(pairing[:story_id])%>, 
+                    <%= link_to 'delete', story_path(pairing[:story_id]), method: 'DELETE', confirm: 'Yakin?' %>)
+                    </td>
                 <% else %>
                     <td><%= link_to 'Add Story', new_story_for_url(pairing[:id])%></td>
                 <%end%>
