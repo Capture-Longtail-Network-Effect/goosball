@@ -40,9 +40,7 @@ class PairingsController < ApplicationController
             member_1,member_2 = member_2, member_1
         end
 		
-        @pairing.date = Date.new pairing_params["date(1i)"].to_i, 
-														 pairing_params["date(2i)"].to_i, 
-														 pairing_params["date(3i)"].to_i
+        @pairing.date = Date.strptime(pairing_params[:date], "%d-%m-%Y")
 		@pairing.members_ids = [member_1, member_2]
 		if @pairing.save
 			flash[:notice] = "Pairins created"
