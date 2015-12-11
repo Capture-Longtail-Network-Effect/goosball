@@ -21,6 +21,10 @@ class MembersController < ApplicationController
       end
     end
 
+    def edit
+      @member = Member.find(params[:id])
+    end
+
     def update
       @member = Member.find(params[:id])
       if @member.update(members_params)
@@ -31,8 +35,14 @@ class MembersController < ApplicationController
       end
     end
 
-    def edit
+    def destroy
       @member = Member.find(params[:id])
+      if @member.destroy
+        flash[:notice] = 'Member deleted'
+        redirect_to url_for action: 'index'
+      else
+        render 'new'
+      end
     end
 
     private 
