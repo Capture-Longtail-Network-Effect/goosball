@@ -1,19 +1,15 @@
 class PairingsController < ApplicationController
 	def index
         @matrix = []
-
         Pairing.all.each do |pairing|
             member1_name = Member.find(pairing.members_ids[0]).name
             member2_name = Member.find(pairing.members_ids[1]).name
             pairing_story = Story.where('pairing_id = ?', pairing.id).first
-
             detail = {
-                id: pairing.id,
                 member1: member1_name, 
                 member2: member2_name, 
                 date: pairing.date,
             }
-
             if pairing_story
                 detail[:story] = pairing_story.story
                 detail[:story_id] = pairing_story.id
@@ -25,7 +21,7 @@ class PairingsController < ApplicationController
 
     def chart
         @members = Member.order('id asc')
-        @pairings = Pairing.group(:members_ids).order('count_members_ids desc').count(:members_ids)
+        @pairings = Pairing.group(:members_ids).order('count_members_ids').count(:members_ids)
     end
 
 	def new
