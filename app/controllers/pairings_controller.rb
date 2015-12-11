@@ -6,6 +6,7 @@ class PairingsController < ApplicationController
             member2_name = Member.find(pairing.members_ids[1]).name
             pairing_story = Story.where('pairing_id = ?', pairing.id).first
             detail = {
+                id: pairing.id,
                 member1: member1_name, 
                 member2: member2_name, 
                 date: pairing.date,
