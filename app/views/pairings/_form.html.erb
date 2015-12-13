@@ -17,12 +17,12 @@
   <div class="row">
       <div class="col-sm-3">
           <%= f.label :member_1, :class => 'control-label' %>
-          <%= f.collection_select :member_1, Member.all, :id, :name, {}, { class: 'form-control' } %>
+          <%= f.collection_select :member_1, @pairee, :id, :name, {}, { class: 'form-control' } %>
       </div>
 
       <div class="col-sm-3">
           <%= f.label :member_2, :class => 'control-label' %>
-          <%= f.collection_select :member_2, Member.all, :id, :name, {}, { class: 'form-control' } %>
+          <%= f.collection_select :member_2, @pairee, :id, :name, {}, { class: 'form-control' } %>
       </div>
 
       <div class="col-sm-6 form-inline">
@@ -35,10 +35,10 @@
   <div class="row" style="text-align: center; padding-top: 1em">
       <%= f.submit 'Register', { class: 'btn btn-primary' } %>
   </div>
+
   <script>
     $(document).ready(function() {
         $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
     });
   </script>
-
 <% end %>

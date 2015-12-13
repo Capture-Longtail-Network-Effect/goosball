@@ -1,63 +1,69 @@
 class PairingsController < ApplicationController
-	def index
-        @matrix = []
-        Pairing.all.each do |pairing|
-            member1_name = Member.find(pairing.members_ids[0]).name
-            member2_name = Member.find(pairing.members_ids[1]).name
-            pairing_story = Story.where('pairing_id = ?', pairing.id).first
-            detail = {
-                id: pairing.id,
-                member1: member1_name, 
-                member2: member2_name, 
-                date: pairing.date,
-            }
-            if pairing_story
-                detail[:story] = pairing_story.story
-                detail[:story_id] = pairing_story.id
-            end
+  def index
+    @matrix = []
+    Pairing.all.each do |pairing|
+      member1_name = Member.find(pairing.members_ids[0]).name
+      member2_name = Member.find(pairing.members_ids[1]).name
+      pairing_story = Story.where('pairing_id = ?', pairing.id).first
+      detail = {
+          id: pairing.id,
+          member1: member1_name,
+          member2: member2_name,
+          date: pairing.date,
+      }
 
-            @matrix << detail
-        end
-	end
+      if pairing_story
+          detail[:story] = pairing_story.story
+          detail[:story_id] = pairing_story.id
+      end
 
-    def chart
-        @members = Member.order('id asc')
-        @pairings = Pairing.group(:members_ids).order('count_members_ids').count(:members_ids)
+      @matrix << detail
     end
+  end
+
+  def chart
+    @members = Member.order('id asc')
+    @pairings = Pairing.group(:members_ids).order('count_members_ids').count(:members_ids)
+  end
 
 	def new
 		@pairing = Pairing.new
+    @pairee = Member.all
 	end
 
 	def create
-		@pairing = Pairing.new
+    @pairing = Pairing.new
 
-        member_1 = pairing_params[:member_1]
-        member_2 = pairing_params[:member_2]
-        
-        #swap if member 2 is greater than member2
-        if member_2 > member_1 
-            member_1,member_2 = member_2, member_1
-        end
-		
-        @pairing.date = Date.strptime(pairing_params[:date], "%d-%m-%Y")
-		@pairing.members_ids = [member_1, member_2]
-		if @pairing.save
-			flash[:notice] = "Pairins created"
-			redirect_to pairings_path
-		else
-			render 'new'
-		end
-	end
+    member_1 = pairing_params[:member_1]
+    member_2 = pairing_params[:member_2]
+
+    #swap if member 2 is greater than member2
+    if member_2 > member_1 
+        member_1,member_2 = member_2, member_1
+    end
+
+    @pairing.date = Date.strptime(pairing_params[:date], "%d-%m-%Y")
+    @pairing.members_ids = [member_1, member_2]
+
+    if @pairing.save
+      flash[:notice] = "Pairings created"
+      redirect_to pairings_path
+    else
+      render 'new'
+    end
+  end
 
   def builder
     @pairing = Pairing.new
   end
 
-	private
-	def pairing_params
-		params.require(:pairing).permit(:date, :member_1, :member_2)
-	end
+  def swapper
+    @pairing = Pairing.new
+  end
 
+  private
+  def pairing_params
+    params.require(:pairing).permit(:date, :member_1, :member_2)
+  end
 
 end
