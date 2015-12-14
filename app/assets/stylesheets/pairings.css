@@ -2,3 +2,39 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+.clear {
+  clear: both;
+}
+
+.select {
+  width: 80%;
+  display: table-cell;
+  position: relative;
+  text-align: center;
+}
+
+.droppable {
+  width: 300px;
+  height: 80px;
+  float: left;
+  margin-left: 0;
+  border: 1px solid #333;
+}
+
+.draggable {
+  width: 300px;
+  height: 80px;
+  text-align: center;
+  line-height: 70px;
+  background: transparent;
+  margin: 1px;
+}
+
+.ui-draggable-dragging {
+  background: orange;
+}
+
+.hoverClass {
+  border: 2px solid orange;
+}
