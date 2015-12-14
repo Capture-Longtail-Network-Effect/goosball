@@ -1,10 +1,10 @@
-<form class="form-group">
+<form class="form-group" method="POST">
   <div class="row">
     <div class="form-wrap">
-      <div id="first_form">
+      <div id="first_form" class="pairing_form">
         <div class="col-sm-3">
           <%= label_tag 'member_1_1', 'Member 1', :class => 'control-label' %>
-          <select id="member_1_1" class="form-control" name='member_1[]'>
+          <select id="member_1_1" class="form-control member_1" name='member_1[]'>
             <%= options_from_collection_for_select(Member.all, :id, :name) %>
           </select>
         </div>
@@ -12,7 +12,7 @@
 
         <div class="col-sm-3">
           <%= label_tag 'member_2_1', 'Member 2', :class => 'control-label' %>
-          <select id="member_2_1" class="form-control" name='member_2[]'>
+          <select id="member_2_1" class="form-control member_2" name='member_2[]'>
             <%= options_from_collection_for_select(Member.all, :id, :name) %>
           </select>
         </div>
@@ -24,31 +24,56 @@
         </div>
       </div>
     </div>
-      <div class="row" style="text-align: center; padding-top: 1em">
-          <button id="tambah" class="btn">Add New</button>
-          <%= submit_tag 'Register', { class: 'btn btn-primary' } %>
+    <input id="pairing_data_input" type="hidden" name="pairing_data" value=""/>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div  style="text-align: center; padding-top: 1em">
+        <button id="tambah" class="btn">Add New</button>
+        <button id="register" class="btn btn-primary">Submit</button>
       </div>
 
       <script>
-      var counter_form = 1;
-      $(document).ready(function() {
-        $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
-        $('#tambah').click(function(e){
-          e.preventDefault();
-          form_pairing = $('#first_form').clone();
-          form_pairing.find('input').each(function(){
-            if($(this).hasClass('hasDatepicker')) {
-              var this_id = $(this).attr('id');
-              counter_form += 1;
-              var new_id = this_id + counter_form;
-              $(this).attr('id', new_id);
-              $(this).removeClass('hasDatepicker');
-              $(this).datepicker({ dateFormat: 'dd-mm-yy' });
-            }
+        var counter_form = 1;
+        $(document).ready(function() {
+          $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
+          $('#tambah').click(function(e){
+            e.preventDefault();
+            form_pairing = $('#first_form').clone();
+            form_pairing.find('input').each(function(){
+              if($(this).hasClass('hasDatepicker')) {
+                var this_id = $(this).attr('id');
+                counter_form += 1;
+                var new_id = this_id + counter_form;
+                $(this).attr('id', new_id);
+                $(this).removeClass('hasDatepicker');
+                $(this).datepicker({ dateFormat: 'dd-mm-yy' });
+              }
+            });
+            form_pairing.appendTo('.form-wrap');
           });
-          form_pairing.appendTo('.form-wrap');
         });
-      });
+        
+        $('#register').click(function(e){
+          var pairing_data = [];
+          $('.pairing_form').each(function(){
+            var pairing = {};
+            $(this).find('select').each(function(){
+              if ($(this).hasClass('member_1')) {
+                pairing.member_1 = $(this).val();
+              } else if ($(this).hasClass('member_2')) {
+                pairing.member_2 = $(this).val();
+              }
+            });
+            $(this).find('input').each(function() {
+              if ($(this).hasClass('datepicker')) {
+                pairing.date = $(this).val();
+              } else if ($(this).hasClass('story')) {
+                pairing.story = $(this).val();
+              }
+            });
+            pairing_data.push(pairing);
+          });
+          $('#pairing_data_input').attr('value', JSON.stringify(pairing_data));
+        });
     </script>
   </div>
 </form>

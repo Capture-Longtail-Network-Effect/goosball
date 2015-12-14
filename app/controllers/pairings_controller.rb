@@ -54,6 +54,10 @@ class PairingsController < ApplicationController
     @pairing = Pairing.new
   end
 
+  def build_pairings
+    debug(params)
+  end
+
 	private
 	def pairing_params
 		params.require(:pairing).permit(:date, :member_1, :member_2)
