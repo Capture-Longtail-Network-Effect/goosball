@@ -29,13 +29,24 @@
           <%= submit_tag 'Register', { class: 'btn btn-primary' } %>
       </div>
 
-    <script>
+      <script>
+      var counter_form = 1;
       $(document).ready(function() {
         $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
         $('#tambah').click(function(e){
-          $('#first_form').clone().appendTo('.form-wrap');
-          $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
           e.preventDefault();
+          form_pairing = $('#first_form').clone();
+          form_pairing.find('input').each(function(){
+            if($(this).hasClass('hasDatepicker')) {
+              var this_id = $(this).attr('id');
+              counter_form += 1;
+              var new_id = this_id + counter_form;
+              $(this).attr('id', new_id);
+              $(this).removeClass('hasDatepicker');
+              $(this).datepicker({ dateFormat: 'dd-mm-yy' });
+            }
+          });
+          form_pairing.appendTo('.form-wrap');
         });
       });
     </script>
