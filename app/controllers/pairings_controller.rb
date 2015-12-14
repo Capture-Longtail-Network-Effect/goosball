@@ -59,6 +59,7 @@ class PairingsController < ApplicationController
 
   def swapper
     @pairing = Pairing.new
+    @pairee = Member.all
   end
 
   private
