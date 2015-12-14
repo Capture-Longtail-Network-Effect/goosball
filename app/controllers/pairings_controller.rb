@@ -1,7 +1,7 @@
 class PairingsController < ApplicationController
 	def index
         @matrix = []
-        Pairing.all.each do |pairing|
+        Pairing.order('date desc').each do |pairing|
             member1_name = Member.find(pairing.members_ids[0]).name
             member2_name = Member.find(pairing.members_ids[1]).name
             pairing_story = Story.where('pairing_id = ?', pairing.id).first
@@ -55,7 +55,28 @@ class PairingsController < ApplicationController
   end
 
   def build_pairings
-    debug(params)
+    members_1 = params[:member_1]
+    members_2 = params[:member_2]
+    dates = params[:date]
+    stories = params[:story]
+    counter = 0
+
+    #Story.delete_all
+    #Pairing.delete_all
+
+    members_1.each do |member_1|
+      pairing = Pairing.new
+      pairing.members_ids = [member_1, members_2[counter]]
+      pairing.date = dates[counter]
+      pairing.save
+      story = Story.new
+      story.story = stories[counter]
+      story.pairing = pairing
+      story.save
+      counter +=1
+    end
+
+    redirect_to pairings_path
   end
 
 	private
